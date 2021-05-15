@@ -95,4 +95,5 @@ class Venda(models.Model):
         ordering = ['-id']
 
     def __str__(self):
-        return f"{self.id}"
+        # Adicionando um outro identificador para facilitar a leitura
+        return f"{self.id}-{self.imovel}"
