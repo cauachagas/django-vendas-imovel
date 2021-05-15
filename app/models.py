@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from cpf_field.models import CPFField
 from helpers.upload_name import upload_imagem_cliente, upload_imagem_imovel
+from smart_selects.db_fields import ChainedForeignKey
 
 # Create your models here.
 
@@ -68,7 +69,13 @@ class Imovel(models.Model):
 class Venda(models.Model):
     id = models.AutoField(primary_key=True, unique=True)
     categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE)
-    imovel = models.ForeignKey(Imovel, on_delete=models.CASCADE)
+    imovel = ChainedForeignKey(
+        "Imovel",
+        chained_field="categoria",
+        chained_model_field="categoria",
+        show_all=False,
+        auto_choose=True,
+    )
 
     @property
     def endereco(self):
