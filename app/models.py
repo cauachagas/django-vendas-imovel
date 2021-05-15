@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from cpf_field.models import CPFField
+from helpers.upload_name import upload_imagem_cliente, upload_imagem_imovel
 
 # Create your models here.
 
@@ -14,8 +15,10 @@ class Cliente(models.Model):
     telefone = models.CharField(max_length=11, unique=True)
     cpf = CPFField(unique=True)
     data_cadastro = models.DateField(auto_now_add=True)
-    imagem = models.ImageField( blank=True, null=True)
-
+    imagem = models.ImageField(
+        upload_to=upload_imagem_cliente, blank=True, null=True
+    )
+    
     def __str__(self):
         return f"{self.nome}"
 
@@ -48,7 +51,9 @@ class Imovel(models.Model):
     titulo = models.CharField(max_length=255)
     endereco = models.TextField()
     criado = models.DateField(auto_now_add=True)
-    imagem = models.ImageField(blank=True, null=True)
+    imagem = models.ImageField(
+        upload_to=upload_imagem_imovel, blank=True, null=True
+    )
     categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE, related_name='categoria')
 
     class Meta:
