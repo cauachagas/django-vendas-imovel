@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from cpf_field.models import CPFField
 
 # Create your models here.
 
@@ -11,7 +12,7 @@ class Cliente(models.Model):
     nome = models.CharField(max_length=100)
     email = models.EmailField(unique=True)
     telefone = models.CharField(max_length=11, unique=True)
-    cpf = models.CharField(max_length=11)
+    cpf = CPFField(unique=True)
     data_cadastro = models.DateField(auto_now_add=True)
     imagem = models.ImageField( blank=True, null=True)
 

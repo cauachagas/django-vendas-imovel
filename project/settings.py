@@ -47,7 +47,11 @@ MEUS_APPS = [
     "app",
 ]
 
-INSTALLED_APPS += MEUS_APPS
+APPS_TERCEIROS = [
+    "cpf_field",
+]
+
+INSTALLED_APPS += MEUS_APPS + APPS_TERCEIROS
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
