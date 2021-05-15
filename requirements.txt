@@ -1,5 +1,6 @@
 Django==3.2.3
 django-cpf==0.1.0
+django-smart-selects==1.5.9
 Pillow==8.2.0
 psycopg2-binary==2.8.6
 python_dotenv==0.17.1
