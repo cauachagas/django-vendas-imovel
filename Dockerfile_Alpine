@@ -1,0 +1,59 @@
+# pull the official base image
+FROM python:3.8.9-alpine as base
+
+FROM base as builder
+
+RUN mkdir /install
+
+RUN apk update && apk add postgresql-dev gcc python3-dev musl-dev jpeg-dev zlib-dev libjpeg
+
+# set work directory
+WORKDIR /install
+
+COPY requirements.txt /requirements.txt
+
+# set environment variables
+ENV PYTHONDONTWRITEBYTECODE 1
+
+ENV PYTHONUNBUFFERED 1
+
+RUN python3 -m pip install --prefix="/install" -r /requirements.txt
+
+# pull the base image (stage 1)
+FROM base
+
+# copy files from /install
+COPY --from=builder /install /usr/local
+
+# install some dependencies
+RUN apk --no-cache add libpq bash libjpeg
+
+# -g is the GID
+RUN addgroup -g 1000 noroot
+
+# -u is the UID
+# -D permits to create an user without password
+RUN adduser -u 1000 -G noroot -h /home/django -D django
+
+# set work directory
+WORKDIR /home/django/app
+
+# set user
+USER django
+
+# add to PATH
+ENV PATH $PATH:/home/django/.local/bin
+
+# copy requirements.txt
+COPY requirements.txt .
+
+# Requirement already satisfied
+
+# install dependencies
+RUN pip install --no-cache-dir -r requirements.txt
+
+# copy project
+COPY . .
+
+# run entrypoint.sh
+ENTRYPOINT ["/home/django/app/entrypoint.sh"]
