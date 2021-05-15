@@ -62,6 +62,8 @@ class Imovel(models.Model):
         db_table = 'imovel'
         # ordenamento por título, seguido por categoria
         ordering = ['titulo', 'categoria']
+        # ajustando o plural
+        verbose_name_plural = "Imóveis"
 
     def __str__(self):
         return f"{self.titulo}"
