@@ -78,6 +78,9 @@ class Venda(models.Model):
         chained_model_field="categoria",
         show_all=False,
         auto_choose=True,
+        help_text = "Queria colocar informações do imóvel, usando a chave estrangeira, "+
+        "mas só irá aparecer depois de salvo no BD. "+
+        "Uma alternativa seria criar um link personalizado para abrir uma nova janela"
     )
 
     @property
