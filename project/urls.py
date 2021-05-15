@@ -15,8 +15,17 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include, re_path
+from rest_framework import routers
+from app.api import viewsets
+
+rota = routers.DefaultRouter()
+rota.register(r"clientes", viewsets.ClienteViewSet, basename="Cliente")
+rota.register(r"categoria", viewsets.CategoriaViewSet, basename="Categoria")
+rota.register(r"imovel", viewsets.ImovelViewSet, basename="Imovel")
+rota.register(r"venda", viewsets.VendaViewSet, basename="Venda")
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     re_path(r"^chaining/", include("smart_selects.urls")),
+    path("", include(rota.urls)),
 ]
