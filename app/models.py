@@ -23,3 +23,19 @@ class Cliente(models.Model):
         db_table = 'cliente'
         # ordenando por nome
         ordering = ['nome']
+
+
+class Categoria(models.Model):
+    '''
+    Model que representa a Categoria do Imóvel
+    '''
+    nome = models.CharField(max_length=255)
+
+    class Meta:
+        db_table = 'categoria'
+        verbose_name_plural = "Categorias"
+        ordering = ['nome']
+
+    def __str__(self):
+        return f"{self.nome}"
+
