@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from cpf_field.models import CPFField
 from helpers.upload_name import upload_imagem_cliente, upload_imagem_imovel
 from smart_selects.db_fields import ChainedForeignKey
+from django.core.validators import MaxValueValidator, MinValueValidator
 
 # Create your models here.
 
@@ -87,7 +88,11 @@ class Venda(models.Model):
         return "%s"%(self.imovel.endereco)
         
     valor = models.IntegerField(
-        default=100000,
+        default=100000, 
+        validators=[
+            MinValueValidator(10000),
+            MaxValueValidator(100000000)
+        ],
         help_text = "O corretor tem direito à 5% de comissão"
     )
     
