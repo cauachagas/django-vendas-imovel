@@ -13,6 +13,11 @@ Para criar um super usuário você pode acessar o `bash` no container `docker-co
 
 Depois de usar `docker-compose up`, em seguida acesse http://localhost:8000/ no seu navegador. Para acesso ao `pgadmin4` acesso  http://localhost:9000/
 
+![](https://drive.google.com/uc?export=view&id=1TulOaycea_RpLKWBElc-ejUzg2hGcKK1)
+
+![](https://drive.google.com/uc?export=view&id=1OccTJyDuZtCOI6eJFkVbJ4F4Yllzi7Vp)
+
+![](https://drive.google.com/uc?export=view&id=1gBIaFpFwkPJVmQyfKZEXAFcqx-E381L9)
 
 ## Referências
 
