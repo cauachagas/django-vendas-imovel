@@ -39,3 +39,22 @@ class Categoria(models.Model):
     def __str__(self):
         return f"{self.nome}"
 
+class Imovel(models.Model):
+    '''
+    Model que representa o Imóvel. Essa tabela se relaciona com Categoria.
+    '''
+    id = models.AutoField(primary_key=True, unique=True)
+    titulo = models.CharField(max_length=255)
+    endereco = models.TextField()
+    criado = models.DateField(auto_now_add=True)
+    imagem = models.ImageField(blank=True, null=True)
+    categoria = models.ForeignKey( Categoria, on_delete=models.CASCADE, related_name='categoria')
+
+    class Meta:
+        # nome da nossa tabela
+        db_table = 'imovel'
+        # ordenamento por título, seguido por categoria
+        ordering = ['titulo', 'categoria']
+
+    def __str__(self):
+        return f"{self.titulo}"
