@@ -52,6 +52,7 @@ APPS_TERCEIROS = [
     "smart_selects",
     "easy",
     "rest_framework",
+    "ninja",
 ]
 
 INSTALLED_APPS += MEUS_APPS + APPS_TERCEIROS
