@@ -48,7 +48,7 @@ class Imovel(models.Model):
     endereco = models.TextField()
     criado = models.DateField(auto_now_add=True)
     imagem = models.ImageField(blank=True, null=True)
-    categoria = models.ForeignKey( Categoria, on_delete=models.CASCADE, related_name='categoria')
+    categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE, related_name='categoria')
 
     class Meta:
         # nome da nossa tabela
@@ -58,3 +58,41 @@ class Imovel(models.Model):
 
     def __str__(self):
         return f"{self.titulo}"
+
+class Venda(models.Model):
+    id = models.AutoField(primary_key=True, unique=True)
+    categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE)
+    imovel = models.ForeignKey(Imovel, on_delete=models.CASCADE)
+
+    @property
+    def endereco(self):
+        '''
+        Retorna o endereço do imóvel.
+        '''
+        return "%s"%(self.imovel.endereco)
+        
+    valor = models.IntegerField(
+        default=100000,
+        help_text = "O corretor tem direito à 5% de comissão"
+    )
+    
+    corretor = models.ForeignKey(User, on_delete=models.CASCADE)
+    cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)
+
+    ESCOLHA_PAGAMENTOS = (
+        ("À vista", "À vista"),
+        ("Parcelado", "180 parcelas"),
+    )
+    pagamento = models.CharField(max_length=9, choices=ESCOLHA_PAGAMENTOS, blank=False, null=False)
+    
+    @property
+    def comissao(self):
+            return self.valor * (5.0/100)
+
+    class Meta:
+        db_table = 'venda'
+        # Ordenando pelo id mais recente
+        ordering = ['-id']
+
+    def __str__(self):
+        return f"{self.id}"
