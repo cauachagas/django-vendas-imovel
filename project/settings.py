@@ -50,6 +50,7 @@ MEUS_APPS = [
 APPS_TERCEIROS = [
     "cpf_field",
     "smart_selects",
+    "easy",
 ]
 
 INSTALLED_APPS += MEUS_APPS + APPS_TERCEIROS

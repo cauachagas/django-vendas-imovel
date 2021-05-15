@@ -1,4 +1,5 @@
 from django.contrib import admin
+import easy
 
 # Register your models here.
 from app.models import Cliente, Categoria, Imovel, Venda
@@ -21,5 +22,10 @@ class ImovelAdmin(admin.ModelAdmin):
 @admin.register(Venda)
 class VendaAdmin(admin.ModelAdmin):
     fields = ("categoria", "imovel", "valor", "cliente", 'corretor', 'pagamento')
-    list_display = ('id', 'categoria','imovel', 'endereco', 'valor', 'pagamento', 'comissao')
+    list_display = ('id', 'link_categoria','link_imovel', 'endereco', 'valor', 'pagamento', 'link_cliente', 'comissao')
     search_fields = ("categoria", "imovel", "cliente", 'corretor', 'pagamento')
+
+
+    link_imovel = easy.ForeignKeyAdminField('imovel')
+    link_cliente = easy.ForeignKeyAdminField('cliente')
+    link_categoria = easy.ForeignKeyAdminField('categoria')
