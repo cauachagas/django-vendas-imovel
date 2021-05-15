@@ -19,6 +19,8 @@ Depois de usar `docker-compose up`, em seguida acesse http://localhost:8000/ no 
 
 ![](https://drive.google.com/uc?export=view&id=1gBIaFpFwkPJVmQyfKZEXAFcqx-E381L9)
 
+![](https://drive.google.com/uc?export=view&id=1liga03PDTd_nexXkh_QMSyn_lYBOPToR)
+
 ## Referências
 
 - https://testdriven.io/blog/dockerizing-django-with-postgres-gunicorn-and-nginx/
